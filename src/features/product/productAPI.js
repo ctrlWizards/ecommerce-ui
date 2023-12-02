@@ -1,7 +1,8 @@
+import { BACKEND_URL } from "../../app/constants";
 
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch('/products/' + id);
+    const response = await fetch(`${BACKEND_URL}/products/` + id);
     const data = await response.json();
     resolve({ data });
   });
@@ -9,7 +10,7 @@ export function fetchProductById(id) {
 
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    const response = await fetch('/products/', {
+    const response = await fetch(`${BACKEND_URL}/products/`, {
       method: 'POST',
       body: JSON.stringify(product),
       headers: { 'content-type': 'application/json' },
@@ -22,7 +23,7 @@ export function createProduct(product) {
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
     const response = await fetch(
-      '/products/' + update.id,
+      `${BACKEND_URL}/products/` + update.id,
       {
         method: 'PATCH',
         body: JSON.stringify(update),
@@ -58,7 +59,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
   return new Promise(async (resolve) => {
     const response = await fetch(
-      '/products?' + queryString
+      `${BACKEND_URL}/products?` + queryString
     );
     const data = await response.json();
     const totalItems = await response.headers.get('X-Total-Count');
